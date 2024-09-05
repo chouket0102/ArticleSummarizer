@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
+    <title>Article Summarizer</title>
+</head>
+<body>
+    <h1>Article Summarizer</h1>
+    <form method="POST">
+        <label for="url">Enter the URL of the article:</label>
+        <input type="text" name="url" id="url" required>
+        <button type="submit">Summarize</button>
+        <button type="button" class="clear" onclick="clearPage()">Clear</button>
+    </form>
+    
+    
+    {% if summary %}
+    <h2>Article Title:</h2>
+    <p>{{ title }}</p>
+    
+    <h2>Date of Publication:</h2>
+    <p>{{ publish_date }}</p>
+
+    <h2>Author(s):</h2>
+    {% if authors %}
+        <ul>
+            {% for author in authors %}
+                <li>{{ author }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No authors available.</p>
+    {% endif %}
+    
+    <h2>Summary:</h2>
+    <p>{{ summary }}</p>
+    {% endif %}
+    <script>
+        function clearPage() {
+            // Clear the input field
+            document.getElementById('url').value = '';
+
+            // Clear the displayed content by reloading the page
+            window.location.href = "/";
+        }
+    </script>
+</body>
+</html>
